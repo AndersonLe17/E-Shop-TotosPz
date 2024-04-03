@@ -34,14 +34,16 @@ public class UsuarioMapper {
                                         Persona persona, Sede sede, Perfil perfil,
                                         PasswordEncoder passwordEncoder, Integer usuMod) {
         return Usuario.builder()
+                .usuCod(usuario.getUsuCod())
                 .usuPer(persona)
-                .usuNom(usuReq.getUsuNom())
-                .usuCorEle(StringUtil.correoBuilder(usuReq))
+                .usuNom(usuReq.getUsuNom() != null ? usuReq.getUsuNom() : usuario.getUsuNom())
+                .usuCorEle(usuReq.getUsuNom() != null ? StringUtil.correoBuilder(usuReq) : usuario.getUsuCorEle())
                 .usuCon(!persona.getPerNumDoc().equals(usuario.getUsuPer().getPerNumDoc()) ? passwordEncoder.encode(persona.getPerNumDoc()): usuario.getUsuCon())
                 .usuPerf(perfil)
                 .usuSed(sede)
                 .usuEst(usuReq.getUsuEst() != null ? Estado.valueOf(usuReq.getUsuEst()) : usuario.getUsuEst())
                 .usuMod(Usuario.builder().usuCod(usuMod).build())
+                .usuReg(usuario.getUsuReg())
                 .build();
     }
 

@@ -48,7 +48,7 @@ public class UsuarioController {
 
     @PutMapping("/{usuCod}")
     public ResponseEntity editarUsuario(@Valid @RequestBody UsuarioEditReq usuReq,
-                                        @PathVariable Integer usuCod, HttpServletRequest req) {
+                                        @PathVariable(name = "usuCod") Integer usuCod, HttpServletRequest req) {
         return ResponseHttp.ok(usuarioService.update(usuReq, usuCod, req));
     }
 

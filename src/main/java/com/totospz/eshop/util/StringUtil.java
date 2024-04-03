@@ -14,18 +14,18 @@ public class StringUtil {
     public static List<String> usernamesBuilder(PersonaRegReq perReq) {
 
         return Arrays.asList(
-                new StringBuilder(perReq.getPerNom().toUpperCase().charAt(0))
+                new StringBuilder(String.valueOf(perReq.getPerNom().toUpperCase().charAt(0)))
                         .append(StringUtils.capitalize(perReq.getPerApePat())).toString().trim(),
                 perReq.getPerNom().split(" ").length > 1
-                        ? new StringBuilder(perReq.getPerNom().split(" ")[1].toUpperCase().charAt(0))
+                        ? new StringBuilder(String.valueOf(perReq.getPerNom().split(" ")[1].toUpperCase().charAt(0)))
                         .append(StringUtils.capitalize(perReq.getPerApePat())).toString().trim()
                         : null,
                 perReq.getPerNom().split(" ").length > 1
-                        ? new StringBuilder(perReq.getPerNom().toUpperCase().charAt(0))
+                        ? new StringBuilder(String.valueOf(perReq.getPerNom().toUpperCase().charAt(0)))
                         .append(perReq.getPerNom().split(" ")[1].toUpperCase().charAt(0))
                         .append(StringUtils.capitalize(perReq.getPerApePat())).toString().trim()
                         : null,
-                new StringBuilder(perReq.getPerNom().toUpperCase().charAt(0))
+                new StringBuilder(String.valueOf(perReq.getPerNom().toUpperCase().charAt(0)))
                         .append(perReq.getPerApePat().toUpperCase().charAt(0))
                         .append(StringUtils.capitalize(perReq.getPerApeMat())).toString().trim()
         );

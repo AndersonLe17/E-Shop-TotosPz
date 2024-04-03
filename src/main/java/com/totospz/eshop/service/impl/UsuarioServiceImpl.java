@@ -89,11 +89,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuReq.getUsuPer() != null)
             usuarioValid.validUpdate(usuReq, usuario);
         // * Validate Entities
-        Sede sede = !usuario.getUsuSed().getSedCod().equals(usuReq.getUsuSedCod())
+        Sede sede = usuReq.getUsuSedCod() != null && !usuario.getUsuSed().getSedCod().equals(usuReq.getUsuSedCod())
                 ? sedeRepository.findById(usuReq.getUsuSedCod())
                         .orElseThrow(() -> new EntityNotFoundException("Sede", "Cod", usuReq.getUsuSedCod()))
                 : usuario.getUsuSed();
-        Perfil perfil = !usuario.getUsuPerf().getPerfCod().equals(usuReq.getUsuPerfCod())
+        Perfil perfil = usuReq.getUsuPerfCod() != null && !usuario.getUsuPerf().getPerfCod().equals(usuReq.getUsuPerfCod())
                 ? perfilRepository.findById(usuReq.getUsuPerfCod())
                         .orElseThrow(() -> new EntityNotFoundException("Perfil", "Cod", usuReq.getUsuPerfCod()))
                 : usuario.getUsuPerf();

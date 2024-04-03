@@ -56,7 +56,7 @@ public class Usuario extends EntityConfig implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.getUsuPer().getPerNom()));
+        return List.of(new SimpleGrantedAuthority(this.getUsuPerf().getPerfNom()));
     }
 
     @Override

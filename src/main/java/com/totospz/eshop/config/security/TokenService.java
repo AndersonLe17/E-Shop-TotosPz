@@ -21,22 +21,19 @@ public class TokenService {
 
     public String generateToken(Usuario usuario) {
         try {
-            byte[] decodeSecret = Base64.getDecoder().decode(apiSecret);
-            Algorithm algorithm = Algorithm.HMAC256(new String(decodeSecret));
             return JWT.create()
                     .withIssuer("totospz")
                     .withSubject(usuario.getUsername())
                     .withClaim("cod", usuario.getUsuCod())
                     .withExpiresAt(generateExpirationToken())
-                    .sign(algorithm);
+                    .sign(getAlgorithm());
         } catch (JWTCreationException exception) {
             throw new RuntimeException();
         }
     }
 
     public String getSubject(String token) {
-        Algorithm algorithm = Algorithm.HMAC256(apiSecret);
-        DecodedJWT verifier = JWT.require(algorithm)
+        DecodedJWT verifier = JWT.require(getAlgorithm())
                 .withIssuer("totospz")
                 .build()
                 .verify(token);
@@ -46,6 +43,11 @@ public class TokenService {
 
     private Instant generateExpirationToken() {
         return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.of("-05:00"));
+    }
+
+    private Algorithm getAlgorithm() {
+        byte[] decodeSecret = Base64.getDecoder().decode(apiSecret);
+        return  Algorithm.HMAC256(new String(decodeSecret));
     }
 
 }

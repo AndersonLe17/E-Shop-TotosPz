@@ -34,7 +34,7 @@ public class UsuarioController {
         return ResponseHttp.ok(usuarioService.findByCod(usuCod));
     }
 
-    @PreAuthorize("hasRole('CAJERO')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/pagination")
     public ResponseEntity listarUsuarios(@PageableDefault(sort = {"fecHorMod"}, direction = Sort.Direction.DESC) Pageable pageable,
                                          @RequestParam(name = "usuNom", required = false) String usuNom,

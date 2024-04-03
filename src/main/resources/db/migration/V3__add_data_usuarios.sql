@@ -22,7 +22,7 @@ INSERT INTO personas (per_cod, per_nom, per_ape_pat, per_ape_mat, per_tip_doc, p
 INSERT INTO perfiles (perf_cod, perf_nom, perf_des, perf_est, usu_reg, usu_mod, fec_hor_reg, fec_hor_mod)
     VALUES (1, 'ROLE_ADMINISTRADOR', 'Usuario con acceso total al sistema', 'ACTIVO', null, null, NOW(), NOW()),
            (2, 'ROLE_CAJERO', 'Usuario responsable de tomar pedidos y recibir pagos.', 'ACTIVO', null, null, NOW(), NOW()),
-           (3, 'ROLE_ COCINERO', 'Usuario responsable de procesar los pedidos.', 'ACTIVO', null, null, NOW(), NOW());
+           (3, 'ROLE_COCINERO', 'Usuario responsable de procesar los pedidos.', 'ACTIVO', null, null, NOW(), NOW());
 
 INSERT INTO sedes (sed_cod, sed_nom, sed_ubi_cod, sed_dir, sed_ruc, sed_raz_soc, sed_est, usu_reg, usu_mod, fec_hor_reg, fec_hor_mod)
     VALUES (1, 'Toto''s Pizza Huancayo', '110101', 'Av. Leandra Torres Nro. 112', '20568283385', 'TOTO''S PIZZA S.A.C.', 'ACTIVO', null, null, NOW(), NOW());

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ValueOfEnumValidator implements ConstraintValidator<EnumField, CharSequence> {
+public class EnumFieldValidator implements ConstraintValidator<EnumField, CharSequence> {
 
     private List<String> acceptedValues;
 

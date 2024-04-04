@@ -2,7 +2,6 @@ package com.totospz.eshop.domain.model;
 
 import com.totospz.eshop.domain.config.EntityConfig;
 import com.totospz.eshop.domain.enums.Estado;
-import com.totospz.eshop.domain.model.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-
-import java.util.List;
 
 @Data @SuperBuilder
 @NoArgsConstructor @AllArgsConstructor
@@ -35,7 +32,7 @@ public class Perfil extends EntityConfig {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private Estado perfEst;
 
-    @OneToMany(mappedBy = "usuPerf", orphanRemoval = true)
-    private List<Usuario> perfUsus;
+//    @OneToMany(mappedBy = "usuPerf", orphanRemoval = true)
+//    private List<Usuario> perfUsus;
 
 }

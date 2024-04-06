@@ -2,7 +2,6 @@ package com.totospz.eshop.domain.model;
 
 import com.totospz.eshop.domain.config.EntityConfig;
 import com.totospz.eshop.domain.enums.Estado;
-import com.totospz.eshop.domain.model.Ubigeo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,6 +42,6 @@ public class Sede extends EntityConfig {
     @Enumerated(EnumType.STRING)
     @Column(name = "sed_est", nullable = false, length = 20)
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private Estado sesEst;
+    private Estado sedEst;
 
 }

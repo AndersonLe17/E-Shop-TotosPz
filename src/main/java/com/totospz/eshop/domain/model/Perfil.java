@@ -10,6 +10,8 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.List;
+
 @Data @SuperBuilder
 @NoArgsConstructor @AllArgsConstructor
 @Entity @Table(name = "perfiles")
@@ -32,7 +34,7 @@ public class Perfil extends EntityConfig {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private Estado perfEst;
 
-//    @OneToMany(mappedBy = "usuPerf", orphanRemoval = true)
-//    private List<Usuario> perfUsus;
+    @OneToMany(mappedBy = "usuPerf")
+    private List<Usuario> perfUsus;
 
 }

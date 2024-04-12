@@ -24,7 +24,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("totospz")
                     .withSubject(usuario.getUsername())
-                    .withClaim("cod", usuario.getUsuCod())
+                    .withClaim("usuCod", usuario.getUsuCod())
                     .withExpiresAt(generateExpirationToken())
                     .sign(getAlgorithm());
         } catch (JWTCreationException exception) {
@@ -41,8 +41,17 @@ public class TokenService {
         return verifier.getSubject();
     }
 
-    private Instant generateExpirationToken() {
-        return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.of("-05:00"));
+    public Long getExpiredTime(String token) {
+        DecodedJWT verifier = JWT.require(getAlgorithm())
+                .withIssuer("totospz")
+                .build()
+                .verify(token);
+
+        return verifier.getExpiresAtAsInstant().getEpochSecond();
+    }
+
+    public Instant generateExpirationToken() {
+        return LocalDateTime.now().plusMinutes(15).toInstant(ZoneOffset.of("-05:00"));
     }
 
     private Algorithm getAlgorithm() {

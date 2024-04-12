@@ -19,6 +19,18 @@ public class ResponseHttp {
         );
     }
 
+    public static <T> ResponseEntity okHandler(List<ErrorResponse> errors) {
+        return new ResponseEntity<>(
+                EntityResponse.builder()
+                        .code(HttpStatus.OK.value())
+                        .status(HttpStatus.OK.getReasonPhrase())
+                        .message("Error")
+                        .errors(errors)
+                        .build(),
+                HttpStatus.OK
+        );
+    }
+
     public static <T> ResponseEntity created(T payload) {
         return new ResponseEntity<>(
                 EntityResponse.builder()

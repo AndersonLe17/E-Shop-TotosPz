@@ -4,6 +4,7 @@ import com.totospz.eshop.config.response.ResponseHttp;
 import com.totospz.eshop.config.security.TokenService;
 import com.totospz.eshop.domain.dto.auth.LoginReq;
 import com.totospz.eshop.domain.dto.auth.TokenRes;
+import com.totospz.eshop.domain.mapper.PerfilMapper;
 import com.totospz.eshop.domain.model.Usuario;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,18 @@ public class AuthController {
     public ResponseEntity autenticarUsuario(@Valid @RequestBody LoginReq loginReq) {
         Authentication authToken = new UsernamePasswordAuthenticationToken(loginReq.getUsername(), loginReq.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authToken);
-        String jsonWebToken = tokenService.generateToken((Usuario) authenticate.getPrincipal());
-        return ResponseHttp.ok(TokenRes.builder().token(jsonWebToken).build());
+        Usuario usuario = (Usuario) authenticate.getPrincipal();
+        String jsonWebToken = tokenService.generateToken(usuario);
+        return ResponseHttp.ok(
+                TokenRes.builder()
+                        .token(jsonWebToken)
+                        .usuCod(usuario.getUsuCod())
+                        .usuNom(usuario.getUsuNom())
+                        .usuCorEle(usuario.getUsuCorEle())
+                        .usuPerf(PerfilMapper.perfilDescResponseMapper(usuario.getUsuPerf()))
+                        .exp(tokenService.getExpiredTime(jsonWebToken))
+                        .build()
+        );
     }
 
 }

@@ -6,7 +6,7 @@ import jakarta.validation.ValidationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,7 +41,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity handleBusinessValidations(Exception ex) {
+    public ResponseEntity handleBusinessValidations(ValidationException ex) {
         return ResponseHttp.badRequest(
                 Arrays.asList(ErrorResponse.builder()
                         .error("Business Validation")
@@ -51,12 +51,12 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         );
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity handleAccessDeniedException(AccessDeniedException ex) {
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity handleUsernameNotFoundException(BadCredentialsException ex) {
         return ResponseHttp.unauthorized(
                 Arrays.asList(ErrorResponse.builder()
-                        .error("Access Denied")
-                        .msg(ex.getMessage())
+                        .error("Auth Validation")
+                        .msg("El nombre de Usuario y/o Contraseña son incorrectos.")
                         .build()
                 )
         );

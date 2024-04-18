@@ -25,6 +25,8 @@ public class TokenService {
                     .withIssuer("totospz")
                     .withSubject(usuario.getUsername())
                     .withClaim("usuCod", usuario.getUsuCod())
+                    .withClaim("usuCorEle", usuario.getUsuCorEle())
+                    .withClaim("usuPerf", usuario.getUsuPerf().getPerfNom())
                     .withExpiresAt(generateExpirationToken())
                     .sign(getAlgorithm());
         } catch (JWTCreationException exception) {
@@ -50,8 +52,14 @@ public class TokenService {
         return verifier.getExpiresAtAsInstant().getEpochSecond();
     }
 
+    public Integer getExpiredSeconds(String token) {
+        Long now = Instant.now().getEpochSecond();
+        Long expired = this.getExpiredTime(token);
+        return (int) (expired - now);
+    }
+
     public Instant generateExpirationToken() {
-        return LocalDateTime.now().plusMinutes(15).toInstant(ZoneOffset.of("-05:00"));
+        return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.of("-05:00"));
     }
 
     private Algorithm getAlgorithm() {

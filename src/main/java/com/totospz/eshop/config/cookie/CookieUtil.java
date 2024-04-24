@@ -21,11 +21,10 @@ public class CookieUtil {
     public static void clear(HttpServletResponse httpServletResponse, String name) {
         Cookie cookie = new Cookie(name, null);
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(1);
+        cookie.setMaxAge(0);
         cookie.setDomain("localhost");
         cookie.setPath("/");
         httpServletResponse.addCookie(cookie);
-
     }
 
     public static String getTokenFromCookie(HttpServletRequest request) {

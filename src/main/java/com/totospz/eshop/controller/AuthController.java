@@ -38,12 +38,22 @@ public class AuthController {
                 TokenRes.builder()
                         .token(jwt)
                         .usuCod(usuario.getUsuCod())
+                        .usuPerNom(usuario.getUsuPer().getPerNom()
+                                + " | " + usuario.getUsuPer().getPerApePat()
+                                + " | " + usuario.getUsuPer().getPerApeMat()
+                        )
                         .usuNom(usuario.getUsuNom())
                         .usuCorEle(usuario.getUsuCorEle())
                         .usuPerf(PerfilMapper.perfilDescResponseMapper(usuario.getUsuPerf()))
                         .exp(tokenService.getExpiredTime(jwt))
                         .build()
         );
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity logout(HttpServletResponse response) {
+        CookieUtil.clear(response, "jwt");
+        return ResponseHttp.ok(null);
     }
 
 }

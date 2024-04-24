@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class TokenRes {
     private String token;
     private Integer usuCod;
+    private String usuPerNom;
     private String usuNom;
     private String usuCorEle;
     private PerfilDescRes usuPerf;

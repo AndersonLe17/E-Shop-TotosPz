@@ -1,5 +1,6 @@
 api:
     security:
+        expiration: 15
         secret: ${JWT_SECRET}
 server:
     error:

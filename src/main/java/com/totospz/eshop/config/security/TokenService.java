@@ -19,6 +19,9 @@ public class TokenService {
     @Value("${api.security.secret}")
     private String apiSecret;
 
+    @Value("${api.security.expiration}")
+    private Integer apiExpiration;
+
     public String generateToken(Usuario usuario) {
         try {
             return JWT.create()
@@ -63,12 +66,12 @@ public class TokenService {
     }
 
     public Instant generateExpirationToken() {
-        return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.of("-05:00"));
+        return LocalDateTime.now().plusMinutes(apiExpiration).toInstant(ZoneOffset.of("-05:00"));
     }
 
     private Algorithm getAlgorithm() {
         byte[] decodeSecret = Base64.getDecoder().decode(apiSecret);
-        return  Algorithm.HMAC256(new String(decodeSecret));
+        return Algorithm.HMAC256(new String(decodeSecret));
     }
 
 }

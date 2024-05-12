@@ -62,4 +62,9 @@ public class StringUtil {
                 .toString().toLowerCase();
     }
 
+    public static String perfilBuilder(String perNom) {
+        return new StringBuilder("ROLE_")
+                .append(perNom.toUpperCase().replace(" ", "_"))
+                .toString();
+    }
 }

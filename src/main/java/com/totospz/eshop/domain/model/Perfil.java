@@ -21,13 +21,17 @@ public class Perfil extends EntityConfig {
     @Column(name = "perf_cod", nullable = false)
     private Integer perfCod;
 
-    @Column(name = "perf_nom", nullable = false, unique = true, length = 25)
+    @Column(name = "perf_nom", nullable = false, unique = true, length = 30)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String perfNom;
 
     @Column(name = "perf_des", nullable = false, length = 128)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String perfDes;
+
+    @Column(name = "perf_det", nullable = false, length = 512)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private String perfDet;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "perf_est", nullable = false, length = 20)

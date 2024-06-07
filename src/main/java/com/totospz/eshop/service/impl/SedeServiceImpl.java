@@ -6,8 +6,9 @@ import com.totospz.eshop.domain.dto.sede.SedeEditReq;
 import com.totospz.eshop.domain.dto.sede.SedeRegReq;
 import com.totospz.eshop.domain.dto.sede.SedeRes;
 import com.totospz.eshop.domain.enums.Estado;
-import com.totospz.eshop.domain.mapper.PaginationMapper;
-import com.totospz.eshop.domain.mapper.SedeMapper;
+import com.totospz.eshop.domain.model.Usuario;
+import com.totospz.eshop.util.mapper.PaginationMapper;
+import com.totospz.eshop.util.mapper.SedeMapper;
 import com.totospz.eshop.domain.model.Sede;
 import com.totospz.eshop.domain.model.Ubigeo;
 import com.totospz.eshop.domain.valid.sede.SedeValid;
@@ -75,6 +76,20 @@ public class SedeServiceImpl implements SedeService {
         // * Persistence
         Integer usuMod = (Integer) req.getAttribute("usuCod");
         sede = sedeRepository.save(SedeMapper.sedeMapper(sedReq, sede, ubigeo, usuMod));
+        // * Return
+        return SedeMapper.sedeResponseMapper(sede);
+    }
+
+    @Override
+    public SedeRes changeState(Integer sedCod, HttpServletRequest req) {
+        // * Validations
+        Sede sede = sedeRepository.findById(sedCod)
+                .orElseThrow(() -> new EntityNotFoundException("Sede", "Cod", sedCod));
+        // * Persistence
+        Integer usuMod = (Integer) req.getAttribute("usuCod");
+        sede.setSedEst(sede.getSedEst().equals(Estado.ACTIVO) ? Estado.INACTIVO : Estado.ACTIVO);
+        sede.setUsuMod(Usuario.builder().usuCod(usuMod).build());
+        sede = sedeRepository.save(sede);
         // * Return
         return SedeMapper.sedeResponseMapper(sede);
     }

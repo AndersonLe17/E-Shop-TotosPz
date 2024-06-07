@@ -6,8 +6,8 @@ import com.totospz.eshop.domain.dto.perfil.PerfilEditReq;
 import com.totospz.eshop.domain.dto.perfil.PerfilRegReq;
 import com.totospz.eshop.domain.dto.perfil.PerfilRes;
 import com.totospz.eshop.domain.enums.Estado;
-import com.totospz.eshop.domain.mapper.PaginationMapper;
-import com.totospz.eshop.domain.mapper.PerfilMapper;
+import com.totospz.eshop.util.mapper.PaginationMapper;
+import com.totospz.eshop.util.mapper.PerfilMapper;
 import com.totospz.eshop.domain.model.Perfil;
 import com.totospz.eshop.domain.model.Usuario;
 import com.totospz.eshop.domain.valid.perfil.PerfilValid;
@@ -76,7 +76,7 @@ public class PerfilServiceImpl implements PerfilService {
     }
 
     @Override
-    public Object changeState(Integer perfCod, HttpServletRequest req) {
+    public PerfilRes changeState(Integer perfCod, HttpServletRequest req) {
         // * Validations
         Perfil perfil = perfilRepository.findById(perfCod)
                 .orElseThrow(() -> new EntityNotFoundException("Perfil", "Cod", perfCod));

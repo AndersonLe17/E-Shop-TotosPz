@@ -3,12 +3,14 @@ package com.totospz.eshop.domain.dto.usuario;
 import com.totospz.eshop.config.validation.annotation.EnumField;
 import com.totospz.eshop.domain.dto.persona.PersonaEditReq;
 import com.totospz.eshop.domain.enums.Estado;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.totospz.eshop.domain.model.Usuario;
+import lombok.*;
 
-@Data
-@NoArgsConstructor @AllArgsConstructor
+/**
+ * DTO for {@link Usuario}
+ */
+@Getter @Setter @ToString
+@AllArgsConstructor @NoArgsConstructor @Builder
 public class UsuarioEditReq {
 
     private PersonaEditReq usuPer;

@@ -1,22 +1,24 @@
 package com.totospz.eshop.domain.dto.usuario;
 
 import com.totospz.eshop.domain.dto.persona.PersonaRegReq;
+import com.totospz.eshop.domain.model.Usuario;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor @AllArgsConstructor
+/**
+ * DTO for {@link Usuario}
+ */
+@Getter @Setter @ToString
+@AllArgsConstructor @NoArgsConstructor @Builder
 public class UsuarioRegReq {
 
-    @NotNull(message = "Los datos personales no debe ser nulo.")
+    @NotNull(message = "La persona del usuario es requerido.")
     private PersonaRegReq usuPer;
 
-    @NotNull(message = "El perfil del usuario no debe ser nulo.")
+    @NotNull(message = "El perfil del usuario es requerido.")
     private Integer usuPerfCod;
 
-    @NotNull(message = "La sede del usuario no debe ser nulo.")
+    @NotNull(message = "La sede del usuario es requerido.")
     private Integer usuSedCod;
 
     private String usuNom;

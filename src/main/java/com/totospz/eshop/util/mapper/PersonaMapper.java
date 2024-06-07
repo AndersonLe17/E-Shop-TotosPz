@@ -1,4 +1,4 @@
-package com.totospz.eshop.domain.mapper;
+package com.totospz.eshop.util.mapper;
 
 import com.totospz.eshop.domain.dto.persona.PersonaDescRes;
 import com.totospz.eshop.domain.dto.persona.PersonaEditReq;

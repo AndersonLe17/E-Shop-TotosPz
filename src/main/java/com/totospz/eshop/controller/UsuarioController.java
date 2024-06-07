@@ -52,4 +52,9 @@ public class UsuarioController {
         return ResponseHttp.ok(usuarioService.update(usuReq, usuCod, req));
     }
 
+    @PutMapping("/change-estado/{usuCod}")
+    public ResponseEntity<?> cambiarEstadoUsuario(@PathVariable Integer usuCod, HttpServletRequest req) {
+        return ResponseHttp.ok(usuarioService.changeState(usuCod, req));
+    }
+
 }

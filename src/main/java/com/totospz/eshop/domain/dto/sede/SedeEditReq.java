@@ -13,23 +13,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor @NoArgsConstructor
 public class SedeEditReq {
 
-    @NoBlank(message = "El nombre de la sede no debe estar en blanco.")
+    @NoBlank(message = "El nombre de la sede no debe contener espacios en blanco.")
     @Size(min = 2, max = 128, message = "El nombre de la sede debe de contener entre 2 a 128 caracteres.")
     private String sedNom;
 
-    @NoBlank(message = "El ubigeo de la sede no debe estar en blanco.")
-    @Size(min = 6, max = 6, message = "El ubigeo de la sede debe de contener entre 6 caracteres.")
+    @NoBlank(message = "El ubigeo de la sede no debe contener espacios en blanco.")
+    @Size(min = 6, max = 6, message = "El ubigeo de la sede debe de contener 6 caracteres.")
     private String sedUbiCod;
 
-    @NoBlank(message = "La dirección de la sede no debe estar en blanco.")
+    @NoBlank(message = "La dirección de la sede no debe contener espacios en blanco.")
     @Size(min = 2, max = 255, message = "La dirección de la sede debe de contener entre 2 a 255 caracteres.")
     private String sedDir;
 
-    @NoBlank(message = "El RUC de la sede no debe estar en blanco.")
+    @NoBlank(message = "El RUC de la sede no debe contener espacios en blanco.")
     @Size(min = 11, max = 11, message = "El RUC de la sede debe de contener 11 caracteres.")
     private String sedRuc;
 
-    @NoBlank(message = "La razón social de la sede no debe estar en blanco.")
+    @NoBlank(message = "La razón social de la sede no debe contener espacios en blanco.")
     @Size(min = 2, max = 255, message = "La razón social de la sede debe de contener entre 2 a 255 caracteres.")
     private String sedRazSoc;
 

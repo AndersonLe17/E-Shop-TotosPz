@@ -19,5 +19,5 @@ public interface PerfilService {
 
     PerfilRes update(PerfilEditReq perfReq, Integer perfCod, HttpServletRequest req);
 
-    Object changeState(Integer perfCod, HttpServletRequest req);
+    PerfilRes changeState(Integer perfCod, HttpServletRequest req);
 }

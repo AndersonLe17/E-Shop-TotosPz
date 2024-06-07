@@ -6,9 +6,9 @@ import com.totospz.eshop.domain.dto.usuario.UsuarioEditReq;
 import com.totospz.eshop.domain.dto.usuario.UsuarioRegReq;
 import com.totospz.eshop.domain.dto.usuario.UsuarioRes;
 import com.totospz.eshop.domain.enums.Estado;
-import com.totospz.eshop.domain.mapper.PaginationMapper;
-import com.totospz.eshop.domain.mapper.PersonaMapper;
-import com.totospz.eshop.domain.mapper.UsuarioMapper;
+import com.totospz.eshop.util.mapper.PaginationMapper;
+import com.totospz.eshop.util.mapper.PersonaMapper;
+import com.totospz.eshop.util.mapper.UsuarioMapper;
 import com.totospz.eshop.domain.model.Perfil;
 import com.totospz.eshop.domain.model.Persona;
 import com.totospz.eshop.domain.model.Sede;
@@ -103,6 +103,20 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuReq.getUsuPer() != null)
             persona = personaRepository.save(PersonaMapper.personaMapper(usuReq.getUsuPer(), persona, usuMod));
         usuario = usuarioRepository.save(UsuarioMapper.usuarioMapper(usuReq, usuario, persona, sede, perfil, passwordEncoder, usuMod));
+        // * Return
+        return UsuarioMapper.usuarioResponseMapper(usuario);
+    }
+
+    @Override
+    public UsuarioRes changeState(Integer usuCod, HttpServletRequest req) {
+        // * Validations
+        Usuario usuario = usuarioRepository.findById(usuCod)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario", "Cod", usuCod));
+        // * Persistence
+        Integer usuMod = (Integer) req.getAttribute("usuCod");
+        usuario.setUsuEst(usuario.getUsuEst().equals(Estado.ACTIVO) ? Estado.INACTIVO : Estado.ACTIVO);
+        usuario.setUsuMod(Usuario.builder().usuCod(usuMod).build());
+        usuario = usuarioRepository.save(usuario);
         // * Return
         return UsuarioMapper.usuarioResponseMapper(usuario);
     }

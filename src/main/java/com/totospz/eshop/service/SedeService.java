@@ -19,4 +19,6 @@ public interface SedeService {
                                       String sedRazSoc, String sedRuc, Estado sedEst, HttpServletRequest req) throws URISyntaxException;
 
     SedeRes update(SedeEditReq sedReq, Integer sedCod, HttpServletRequest req);
+
+    SedeRes changeState(Integer sedCod, HttpServletRequest req);
 }

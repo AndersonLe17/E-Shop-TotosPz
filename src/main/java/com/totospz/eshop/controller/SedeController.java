@@ -24,17 +24,17 @@ public class SedeController {
     private final SedeService sedeService;
 
     @PostMapping("/")
-    public ResponseEntity<?> registrarPerfil(@Valid @RequestBody SedeRegReq sedReq, HttpServletRequest req) {
+    public ResponseEntity<?> registrarSede(@Valid @RequestBody SedeRegReq sedReq, HttpServletRequest req) {
         return ResponseHttp.created(sedeService.save(sedReq, req));
     }
 
     @GetMapping("/{sedCod}")
-    public ResponseEntity<?> buscarPerfil(@PathVariable Integer sedCod) {
+    public ResponseEntity<?> buscarSede(@PathVariable Integer sedCod) {
         return ResponseHttp.ok(sedeService.findByCod(sedCod));
     }
 
     @GetMapping("/pagination")
-    public ResponseEntity<?> listarPerfiles(@PageableDefault(sort = {"fecHorMod"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public ResponseEntity<?> listarSedes(@PageableDefault(sort = {"fecHorMod"}, direction = Sort.Direction.DESC) Pageable pageable,
                                             @RequestParam(name = "sedNom", required = false) String sedNom,
                                             @RequestParam(name = "ubiDpt", required = false) String ubiDpt,
                                             @RequestParam(name = "ubiPro", required = false) String ubiPro,
@@ -47,9 +47,14 @@ public class SedeController {
     }
 
     @PutMapping("/{sedCod}")
-    public ResponseEntity<?> editarPerfil(@Valid @RequestBody SedeEditReq sedeReq,
+    public ResponseEntity<?> editarSede(@Valid @RequestBody SedeEditReq sedeReq,
                                           @PathVariable Integer sedCod, HttpServletRequest req) {
         return ResponseEntity.ok(sedeService.update(sedeReq, sedCod, req));
+    }
+
+    @PutMapping("/change-estado/{sedCod}")
+    public ResponseEntity<?> cambiarEstadoSede(@PathVariable Integer sedCod, HttpServletRequest req) {
+        return ResponseHttp.ok(sedeService.changeState(sedCod, req));
     }
 
 }

@@ -5,7 +5,7 @@ import com.totospz.eshop.config.response.ResponseHttp;
 import com.totospz.eshop.config.security.TokenService;
 import com.totospz.eshop.domain.dto.auth.LoginReq;
 import com.totospz.eshop.domain.dto.auth.TokenRes;
-import com.totospz.eshop.domain.mapper.PerfilMapper;
+import com.totospz.eshop.util.mapper.PerfilMapper;
 import com.totospz.eshop.domain.model.Usuario;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

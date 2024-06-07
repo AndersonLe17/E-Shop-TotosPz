@@ -21,4 +21,6 @@ public interface UsuarioService {
     ) throws URISyntaxException;
 
     UsuarioRes update(UsuarioEditReq usuReq, Integer usuCod, HttpServletRequest req);
+
+    UsuarioRes changeState(Integer usuCod, HttpServletRequest req);
 }

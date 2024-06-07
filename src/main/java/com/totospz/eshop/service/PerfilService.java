@@ -18,4 +18,6 @@ public interface PerfilService {
     PaginationResponse findPagination(Pageable pageable, String perfNom, Estado perfEst, HttpServletRequest req) throws URISyntaxException;
 
     PerfilRes update(PerfilEditReq perfReq, Integer perfCod, HttpServletRequest req);
+
+    Object changeState(Integer perfCod, HttpServletRequest req);
 }

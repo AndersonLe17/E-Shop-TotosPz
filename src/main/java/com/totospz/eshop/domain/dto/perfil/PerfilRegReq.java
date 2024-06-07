@@ -13,17 +13,17 @@ import lombok.*;
 @AllArgsConstructor @NoArgsConstructor @Builder
 public class PerfilRegReq {
 
-    @NotNull(message = "El nombre del perfil no debe ser nulo.")
-    @NoBlank(message = "El nombre del perfil no debe estar en blanco.")
+    @NotNull(message = "El nombre del perfil es requerido.")
+    @NoBlank(message = "El nombre del perfil no debe contener espacios en blanco.")
     @Size(min = 2, max = 25, message = "El nombre del perfil debe de contener entre 2 a 25 caracteres.")
     private String perfNom;
 
-    @NotNull(message = "La descripción del perfil no debe ser nulo.")
+    @NotNull(message = "La descripción del perfil es requerido.")
     @NoBlank(message = "La descripción del perfil no debe estar en blanco.")
     @Size(min = 2, max = 128, message = "La descripción del perfil debe de contener entre 2 a 128 caracteres.")
     private String perfDes;
 
-    @NotNull(message = "El detalle del perfil no debe ser nulo.")
+    @NotNull(message = "El detalle del perfil es requerido.")
     @NoBlank(message = "El detalle del perfil no debe estar en blanco.")
     @Size(min = 2, max = 512, message = "El detalle del perfil debe de contener entre 2 a 512 caracteres.")
     private String perfDet;

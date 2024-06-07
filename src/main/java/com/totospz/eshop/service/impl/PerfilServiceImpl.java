@@ -9,6 +9,7 @@ import com.totospz.eshop.domain.enums.Estado;
 import com.totospz.eshop.domain.mapper.PaginationMapper;
 import com.totospz.eshop.domain.mapper.PerfilMapper;
 import com.totospz.eshop.domain.model.Perfil;
+import com.totospz.eshop.domain.model.Usuario;
 import com.totospz.eshop.domain.valid.perfil.PerfilValid;
 import com.totospz.eshop.repository.PerfilRepository;
 import com.totospz.eshop.service.PerfilService;
@@ -70,6 +71,20 @@ public class PerfilServiceImpl implements PerfilService {
         // * Persistence
         Integer usuMod = (Integer) req.getAttribute("usuCod");
         perfil = perfilRepository.save(PerfilMapper.perfilMapper(perfReq, perfil, usuMod));
+        // * Return
+        return PerfilMapper.perfilResponseMapper(perfil);
+    }
+
+    @Override
+    public Object changeState(Integer perfCod, HttpServletRequest req) {
+        // * Validations
+        Perfil perfil = perfilRepository.findById(perfCod)
+                .orElseThrow(() -> new EntityNotFoundException("Perfil", "Cod", perfCod));
+        // * Persistence
+        Integer usuMod = (Integer) req.getAttribute("usuCod");
+        perfil.setPerfEst(perfil.getPerfEst().equals(Estado.ACTIVO) ? Estado.INACTIVO : Estado.ACTIVO);
+        perfil.setUsuMod(Usuario.builder().usuCod(usuMod).build());
+        perfil = perfilRepository.save(perfil);
         // * Return
         return PerfilMapper.perfilResponseMapper(perfil);
     }

@@ -38,13 +38,18 @@ public class PerfilController {
                                             @RequestParam(name = "perfNom", required = false) String perfNom,
                                             @RequestParam(name = "perfEst", required = false) Estado perfEst,
                                             HttpServletRequest req) throws URISyntaxException {
-        return ResponseEntity.ok(perfilService.findPagination(pageable, perfNom, perfEst, req));
+        return ResponseHttp.ok(perfilService.findPagination(pageable, perfNom, perfEst, req));
     }
 
     @PutMapping("/{perfCod}")
-    public ResponseEntity<?> buscarPerfil(@Valid @RequestBody PerfilEditReq perfReq,
+    public ResponseEntity<?> editarPerfil(@Valid @RequestBody PerfilEditReq perfReq,
                                           @PathVariable Integer perfCod, HttpServletRequest req) {
-        return ResponseEntity.ok(perfilService.update(perfReq, perfCod, req));
+        return ResponseHttp.ok(perfilService.update(perfReq, perfCod, req));
+    }
+
+    @PutMapping("/change-estado/{perfCod}")
+    public ResponseEntity<?> cambiarEstadoPerfil(@PathVariable Integer perfCod, HttpServletRequest req) {
+        return ResponseHttp.ok(perfilService.changeState(perfCod, req));
     }
 
 }

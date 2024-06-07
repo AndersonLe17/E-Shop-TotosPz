@@ -22,12 +22,12 @@ public class PerfilValid {
     }
 
     public void validUpdate(PerfilEditReq perfReq, Perfil perfil) {
-        if (perfReq.getPerfNom() != null)
-            if (!perfil.getPerfNom().equals(perfReq.getPerfNom())) {
-                perfReq.setPerfNom(StringUtil.perfilBuilder(perfReq.getPerfNom()));
+        if (perfReq.getPerfNom() != null) {
+            perfReq.setPerfNom(StringUtil.perfilBuilder(perfReq.getPerfNom()));
+            if (!perfil.getPerfNom().equals(perfReq.getPerfNom()))
                 if (perfilRepository.existsByPerfNomIgnoreCase(perfReq.getPerfNom()))
                     throw new ValidationException("El nombre del perfil ya se encuentra registrado.");
-            }
+        }
     }
 
 

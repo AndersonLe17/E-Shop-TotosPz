@@ -47,7 +47,7 @@ public class SedeController {
     }
 
     @PutMapping("/{sedCod}")
-    public ResponseEntity<?> buscarPerfil(@Valid @RequestBody SedeEditReq sedeReq,
+    public ResponseEntity<?> editarPerfil(@Valid @RequestBody SedeEditReq sedeReq,
                                           @PathVariable Integer sedCod, HttpServletRequest req) {
         return ResponseEntity.ok(sedeService.update(sedeReq, sedCod, req));
     }
